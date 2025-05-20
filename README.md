@@ -25,9 +25,13 @@ A simple blogging engine that allows users to:
 
   - Redux Toolkit
 
+- Authentication:
+
+  - Next-Auth
+
 - API Handling:
 
-  - Axios
+  - Axios?
 
 - Testing:
 
