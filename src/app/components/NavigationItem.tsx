@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import classNames from "classnames";
 
 export function NavigationItem({
   slug,
@@ -7,8 +9,14 @@ export function NavigationItem({
   slug: string;
   label: string;
 }) {
+  const pathName = usePathname();
   return (
-    <Link className="hover:underline" href={slug}>
+    <Link
+      className={classNames("hover:underline", {
+        underline: pathName === slug,
+      })}
+      href={slug}
+    >
       {label}
     </Link>
   );

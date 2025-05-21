@@ -1,13 +1,14 @@
 "use client";
 import { useSession } from "next-auth/react";
-import { NavigationItem } from "./NavigationItem";
+import { NavigationItem } from "@/components/NavigationItem";
 import Image from "next/image";
-import { LogoutButton } from "./LogoutButton";
+import { LogoutButton } from "@/components/LogoutButton";
+import Link from "next/link";
 
 export function Navigation() {
   const PublicNavItems = [
     {
-      slug: "/articles",
+      slug: "/",
       label: "Recent Articles",
     },
     {
@@ -31,7 +32,9 @@ export function Navigation() {
   return (
     <div className="flex justify-between bg-white text-background py-6 px-12">
       <div className="flex gap-8 items-center">
-        <Image src="/logo.png" alt="logo" width={30} height={30} />
+        <Link href="/">
+          <Image src="/logo.png" alt="logo" width={30} height={30} />
+        </Link>
         {PublicNavItems.map((item) => (
           <NavigationItem key={item.slug} slug={item.slug} label={item.label} />
         ))}
