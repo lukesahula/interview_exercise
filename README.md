@@ -48,3 +48,7 @@ A simple blogging engine that allows users to:
 1. Install dependencies: `npm install`
 2. Run the development server: `npm run dev`
 3. Open [http://localhost:3000](localhost:3000) to view the app.
+
+## TODO / Dev journal
+
+- Add proper loading according to [https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming](NextJS docs) and connect it with Next-Auth session loading status

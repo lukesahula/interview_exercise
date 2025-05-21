@@ -50,12 +50,21 @@ export default function LoginForm() {
       <label htmlFor="username" className="font-bold">
         Username
       </label>
-      <input placeholder="john.doe@example.com" {...register("username")} />
+      <input
+        placeholder="john.doe@example.com"
+        {...register("username")}
+        className="py-2 px-4 text-foreground bg-background rounded-[8px] border-foreground border-[1px]"
+      />
       {errors.username && <span>{errors.username.message}</span>}
       <label htmlFor="password" className="font-bold">
         Password
       </label>
-      <input placeholder="12345" type="password" {...register("password")} />
+      <input
+        placeholder="12345"
+        type="password"
+        {...register("password")}
+        className="py-2 px-4 text-foreground bg-background rounded-[8px] border-foreground border-[1px]"
+      />
       {errors.password && <span>{errors.password.message}</span>}
       <button
         type="submit"
