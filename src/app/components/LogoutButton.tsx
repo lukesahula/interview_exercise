@@ -1,6 +1,6 @@
 import { signOut } from "next-auth/react";
 
-export function LogoutButton() {
+const LogoutButton = () => {
   return (
     <button
       className="cursor-pointer hover:underline"
@@ -9,4 +9,6 @@ export function LogoutButton() {
       Log Out
     </button>
   );
-}
+};
+
+export default LogoutButton;

@@ -1,11 +1,11 @@
 "use client";
 import { useSession } from "next-auth/react";
-import { NavigationItem } from "@/components/NavigationItem";
+import NavigationItem from "@/components/NavigationItem";
 import Image from "next/image";
-import { LogoutButton } from "@/components/LogoutButton";
+import LogoutButton from "@/components/LogoutButton";
 import Link from "next/link";
 
-export function Navigation() {
+const Navigation = () => {
   const PublicNavItems = [
     {
       slug: "/",
@@ -57,4 +57,6 @@ export function Navigation() {
       </div>
     </div>
   );
-}
+};
+
+export default Navigation;

@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import LoginForm from "@/components/LoginForm";
 import { redirect } from "next/navigation";
 
-export default function LoginPage() {
+const LoginPage = () => {
   const { data: session } = useSession();
 
   if (session?.accessToken) {
@@ -16,4 +16,6 @@ export default function LoginPage() {
       <LoginForm />
     </div>
   );
-}
+};
+
+export default LoginPage;
