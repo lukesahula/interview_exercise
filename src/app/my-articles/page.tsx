@@ -18,7 +18,7 @@ const MyArticles = () => {
 
   const { data, error, isLoading } = useFetchArticlesQuery();
 
-  if (isLoading) return <p>Loading articles…</p>;
+  if (isLoading || status === "loading") return <p>Loading articles…</p>;
   if (error) return <p>Error loading articles</p>;
 
   const articles = data?.items;

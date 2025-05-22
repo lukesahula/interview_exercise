@@ -68,7 +68,7 @@ const LoginForm = () => {
       {errors.password && <span>{errors.password.message}</span>}
       <button
         type="submit"
-        className="font-bold color-foreground self-end bg-blue-500 rounded-[8px] py-2 px-4"
+        className="text-background font-bold color-foreground self-end bg-blue-500 rounded-[8px] py-2 px-4"
       >
         Log In
       </button>
