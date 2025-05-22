@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import * as z from "zod";
 
-const MarkdownInput = dynamic(() => import("@/components/MDXEditor"), {
+const MarkdownInput = dynamic(() => import("@/app/components/MDXEditor"), {
   ssr: false,
 });
 

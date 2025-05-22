@@ -1,8 +1,8 @@
 "use client";
 import { useSession } from "next-auth/react";
-import NavigationItem from "@/components/NavigationItem";
+import NavigationItem from "@/app/components/NavigationItem";
 import Image from "next/image";
-import LogoutButton from "@/components/LogoutButton";
+import LogoutButton from "@/app/components/LogoutButton";
 import Link from "next/link";
 
 const Navigation = () => {

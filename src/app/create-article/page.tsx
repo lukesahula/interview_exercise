@@ -2,7 +2,7 @@
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { ReactElement } from "react";
-import CreateForm from "@/components/ArticleForm";
+import CreateForm from "@/app/components/ArticleForm";
 
 const CreatePage = () => {
   const { status } = useSession({

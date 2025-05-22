@@ -1,7 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 
-import LoginForm from "@/components/LoginForm";
+import LoginForm from "@/app/components/LoginForm";
 import { redirect } from "next/navigation";
 
 const LoginPage = () => {
