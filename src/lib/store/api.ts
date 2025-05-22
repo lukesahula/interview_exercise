@@ -3,6 +3,8 @@ import { getSession } from "next-auth/react";
 
 interface Article {
   title: string;
+  perex: string;
+  image: string;
   content: string;
 }
 
@@ -24,11 +26,21 @@ export const api = createApi({
       return headers;
     },
   }),
+  tagTypes: ["Articles"],
   endpoints: (builder) => ({
     fetchArticles: builder.query<ArticlesResponse, void>({
       query: () => "/articles",
+      providesTags: ["Articles"],
+    }),
+    createArticle: builder.mutation({
+      query: (formData) => ({
+        url: "/articles",
+        method: "POST",
+        body: formData,
+      }),
+      invalidatesTags: ["Articles"],
     }),
   }),
 });
 
-export const { useFetchArticlesQuery } = api;
+export const { useFetchArticlesQuery, useCreateArticleMutation } = api;

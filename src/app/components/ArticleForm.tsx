@@ -4,6 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import * as z from "zod";
 import ImagePreview from "./ImagePreview";
+import { useCreateArticleMutation } from "@/lib/store/api";
+import { useRouter } from "next/navigation";
 
 const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",
@@ -18,18 +20,21 @@ const MarkdownInput = dynamic(() => import("@/app/components/MDXEditor"), {
 });
 
 const FormSchema = z.object({
-  title: z.string().min(1, {
-    message: "Title must be at least 1 characters.",
+  title: z.string().min(4, {
+    message: "Title must be at least 4 characters.",
   }),
+  perex: z.string().min(4, { message: "Perex must be at least 4 characters." }),
   image: z
-    .instanceof(FileList, {
-      message: "Please select an image file.",
+    // https://github.com/orgs/react-hook-form/discussions/11096
+    .instanceof(globalThis.FileList)
+    .refine((files) => files?.length > 0, {
+      message: "An image must be selected.",
     })
-    .refine((file) => file[0].size <= MAX_FILE_SIZE, {
+    .refine((files) => files[0]?.size <= MAX_FILE_SIZE, {
       message:
         "The image is too large. Please choose an image smaller than 5MB.",
     })
-    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file[0].type), {
+    .refine((files) => ACCEPTED_IMAGE_TYPES.includes(files[0]?.type), {
       message: "Please upload a valid image file (JPEG, PNG, or WebP).",
     }),
   content: z.string().min(1, {
@@ -50,9 +55,16 @@ const CreateForm = () => {
     resolver: zodResolver(FormSchema),
     defaultValues: { content: "" },
   });
+  const router = useRouter();
+  const [createArticle, { isLoading, error }] = useCreateArticleMutation();
 
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
-    console.log(data);
+    try {
+      await createArticle(data).unwrap();
+      router.push("/my-articles");
+    } catch (err) {
+      console.error("Failed to create article:", err);
+    }
   };
 
   const imageFile = watch("image");
@@ -68,6 +80,15 @@ const CreateForm = () => {
         className="py-2 px-4 text-foreground bg-background rounded-[8px] border-[1px] border-foreground"
       />
       {errors.title && <span>{errors.title.message}</span>}
+      <label htmlFor="perex" className="font-bold">
+        Perex
+      </label>
+      <input
+        placeholder="Perex"
+        {...register("perex")}
+        className="py-2 px-4 text-foreground bg-background rounded-[8px] border-[1px] border-foreground"
+      />
+      {errors.perex && <span>{errors.perex.message}</span>}
       <label htmlFor="image" className="font-bold">
         Image
       </label>
@@ -94,9 +115,11 @@ const CreateForm = () => {
       <button
         type="submit"
         className="text-background font-bold color-foreground self-end bg-blue-500 rounded-[8px] py-2 px-4"
+        disabled={isLoading}
       >
         Publish
       </button>
+      {error && <span>Error publishing article</span>}
     </form>
   );
 };
