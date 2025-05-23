@@ -20,7 +20,7 @@ export const api = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Articles"],
+  tagTypes: ["Articles", "Images"],
   endpoints: (builder) => ({
     fetchArticles: builder.query<ArticlesResponse, void>({
       query: () => "/articles",
@@ -34,7 +34,23 @@ export const api = createApi({
       }),
       invalidatesTags: ["Articles"],
     }),
+    fetchImages: builder.query<unknown, void>({
+      query: () => "/images",
+      providesTags: ["Images"],
+    }),
+    createImage: builder.mutation({
+      query: (formData) => ({
+        url: "/images",
+        method: "POST",
+        body: formData,
+      }),
+    }),
   }),
 });
 
-export const { useFetchArticlesQuery, useCreateArticleMutation } = api;
+export const {
+  useFetchArticlesQuery,
+  useCreateArticleMutation,
+  useFetchImagesQuery,
+  useCreateImageMutation,
+} = api;
