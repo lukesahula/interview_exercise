@@ -1,12 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { useFetchArticlesQuery } from "@/lib/store/api";
-
-interface Article {
-  title: string;
-  content: string;
-}
+import MyArticlesTable from "../components/MyArticlesTable";
 
 const MyArticles = () => {
   const { status } = useSession({
@@ -16,21 +11,12 @@ const MyArticles = () => {
     },
   });
 
-  const { data, error, isLoading } = useFetchArticlesQuery();
-
-  if (isLoading || status === "loading") return <p>Loading articles…</p>;
-  if (error) return <p>Error loading articles</p>;
-
-  const articles = data?.items;
+  if (status === "loading") return <p>Loading authentication status…</p>;
 
   return (
     <div className="flex mt-40 justify-center items-center flex-col gap-4">
       <h1 className="font-bold text-2xl">My Articles</h1>
-      <ul>
-        {articles?.map((article: Article) => (
-          <li key={article.title}>{article.title}</li>
-        ))}
-      </ul>
+      <MyArticlesTable />
     </div>
   );
 };

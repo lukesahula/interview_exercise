@@ -1,12 +1,6 @@
+import { Article } from "@/app/types/article";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getSession } from "next-auth/react";
-
-interface Article {
-  title: string;
-  perex: string;
-  image: string;
-  content: string;
-}
 
 interface ArticlesResponse {
   items: Article[];
