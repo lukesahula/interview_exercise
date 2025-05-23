@@ -21,6 +21,7 @@ const CreatePage = () => {
 
   return (
     <div className="flex mt-40 mx-auto max-w-xl gap-4 flex-col p-12 rounded-[8px] shadow-2xl shadow-foreground">
+      <h1 className="font-bold text-2xl">Create Article</h1>
       {PageContent}
     </div>
   );
