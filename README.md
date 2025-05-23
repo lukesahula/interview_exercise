@@ -14,7 +14,7 @@ A simple blogging engine that allows users to:
 
 ## Tech Stack
 
-- React + Next.js
+- React + Next.js (App router)
 - TypeScript
 
 - Styling:
@@ -31,7 +31,15 @@ A simple blogging engine that allows users to:
 
 - API Handling:
 
-  - Axios?
+  - RTK-Query
+
+- Forms:
+
+  - React-hook-form
+  - Zod
+
+  - Markdown support:
+    - MDXEditor
 
 - Testing:
 
@@ -49,6 +57,21 @@ A simple blogging engine that allows users to:
 2. Run the development server: `npm run dev`
 3. Open [http://localhost:3000](localhost:3000) to view the app.
 
-## TODO / Dev journal
+## What is done
 
-- Add proper loading according to [https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming](NextJS docs) and connect it with Next-Auth session loading status
+- Login page containing a login form for credentials authentication via NextAuth
+- Create article page with a form to create new articles (currently working without image, via redux-toolkit-queries)
+- My articles page with a simple table of articles available to the logged in tenant
+
+## Next Steps
+
+- Write unit tests for zod validation of the custom image field. Use react-testing-library
+- Handle errors with an error boundary.
+- Make navigation header responsive (i.e. hide a dropdown behind a hamburger menu on mobile)
+- Split article creation into two queries, one for article, one for its image (probably the image first, to get it's imageId to then add to the article creation request?)
+- Add more plugins for MDXEditor
+- Implement the rest of the features, starting with the protected ones (article editation, deletion), continue with the public ones
+- Write UI tests for components with Storybook
+- Write end to end tests with Playwright
+- Unify page styling to have consistent headers and extract a page component to group repeated tailwind classes
+- Add proper loading according to [https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming](NextJS docs) and connect it with Next-Auth session loading status?
