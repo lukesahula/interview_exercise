@@ -1,7 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as z from "zod";
@@ -24,8 +24,6 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(FormSchema) });
 
-  const router = useRouter();
-
   const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
     const { username, password } = data;
 
@@ -36,7 +34,7 @@ const LoginForm = () => {
         redirect: false,
       });
       if (!response?.error) {
-        router.push("/");
+        redirect("/");
       }
       if (!response?.ok) {
         throw new Error("Network response was not ok");
